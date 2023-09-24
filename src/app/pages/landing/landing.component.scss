@@ -84,19 +84,30 @@
     }
   }
   .services-section{
-    .red-line {
-      border: 2px solid red;
-    } 
-    .servicio {
-      text-align: center;
-      margin-top: 20px;
-      img{
-        width: auto;
-        height: 60px;
+    height: 450px;
+    .services-wrapper{
+      margin: auto 80px auto 80px;
+      .red-line {
+        border: 2px solid red;
+      } 
+      .servicio {
+        text-align: center;
+        margin-top: 20px;
+        i{
+          font-size: 40px;
+          color: red;
+        }
+      }
+      .row {
+        &:nth-child(2) {
+          margin-top: 80px;
+        }
       }
     }
   }
   .features-section{
+    height: 650px;
+    background-color: #F5F5F5;
     .right-img{
       img{
         width: 245px;
