@@ -107,21 +107,28 @@
 }
 .features-section{
   padding: 90px 80px;
-  height: 650px;
   background-color: #F5F5F5;
-  .caracteristica{  
+  .caracteristica{
+    margin-bottom: 48px;  
     i{
       font-size: 40px;
       color: red;
     }
-    h3{
-      font-family: 'Poppins', sans-serif;
-      font-weight: 900;
-      font-size: 16px;
-      color: red;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    >div{
+      margin-left: 32px;
+      h3{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        color: red;
+      }
     }
   }
   .right-img{
+    margin: auto 0 auto 40px;
     img{
       width: 245px;
       height: 354px;
