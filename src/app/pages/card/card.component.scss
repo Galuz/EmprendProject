@@ -2,8 +2,23 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #efefef;
   width: 297px;
+
+  transition: background-color 0.3s, color 0.3s; /* Transición suave para el cambio de color */
+
+  &:hover {
+    background-color: #333333;
+    color: white;
+    h2{
+      color: #fe6261;
+    }
+    .social-icons{
+      i{
+        color: #fe6261;
+      }
+    }
+  }
 
   img{
       width: 165px;
@@ -15,7 +30,9 @@
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
     margin: auto auto 32px auto;
   }
 
@@ -26,7 +43,9 @@
   }
 
   p {
-    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
     text-align: center;
     margin-bottom: 16px;
     margin: auto auto 32px auto;
