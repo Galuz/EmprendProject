@@ -37,7 +37,7 @@
   background-color: #F5F5F5;
   @media (min-width: 768px) {
     .row{
-      margin-left: 80px;
+      margin-left: calc(80px - 12px);
     }
   }
   .text-container{
