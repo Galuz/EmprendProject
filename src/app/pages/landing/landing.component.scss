@@ -35,8 +35,10 @@
   }
 .us-section {
   background-color: #F5F5F5;
-  .row{
-    margin-left: 80px;
+  @media (min-width: 768px) {
+    .row{
+      margin-left: 80px;
+    }
   }
   .text-container{
     margin: auto;
@@ -119,7 +121,7 @@
     }
   }
   .right-img{
-    margin: auto 0 auto 40px;
+    //margin: auto 0 auto 40px;
     img{
       width: 245px;
       height: 354px;
