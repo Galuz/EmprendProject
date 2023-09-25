@@ -118,10 +118,14 @@
   </div>
 </div>
 <div class="team-force">
-  <h2>Título</h2>
+  <h2>Nuestro equipo de trabajo</h2>
   <hr class="red-line">
-  <p>Descripción</p>
-  <app-card></app-card>
+  <p>Nuestro equipo de trabajo esta compuesto por individuos guapos, ingeniosos y superpoderosos que estan comprometidos con la madre naturaleza y utilizan sus poderes sobrenaturales para el bien y no para el mal. Compartimos la pasion por innovar y mentenernos al dia sobre los ultimos acontecimientos del universo. </p>
+  <div class="d-flex justify-content-start align-items-start gap-5 flex-wrap">
+    <ng-container *ngFor="let card of cardsData">
+      <app-card [title]="card.title" [description]="card.description"></app-card>
+    </ng-container>
+  </div>
 </div>
 
   
