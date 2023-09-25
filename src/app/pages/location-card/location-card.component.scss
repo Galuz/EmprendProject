@@ -1,3 +1,27 @@
 .mapa{
     height: 300px;
 }
+.card{
+    padding: 16px;
+    background-color: #333333;
+    .card-body{
+        .card-title{
+            color: white;
+        }
+        .red-line{
+             color: #fe6261;
+             opacity: unset;
+        }
+        .align-items-center{
+            i{
+                font-size: 24px;
+                color: #fe6261;
+                margin-right: 16px;
+            }
+            p{
+                color: white;
+                margin: 0;
+            }
+        }
+    }
+}
