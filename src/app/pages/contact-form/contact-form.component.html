@@ -1,0 +1,27 @@
+<div class="form-title">
+  <h3>Escribenos</h3>
+  <p>Agenda una llamada con nosotros y aclara tus dudas.</p>
+</div>
+<form>
+  <div class="mb-3">
+    <i class="bi bi-person-fill"></i>
+    <input type="text" placeholder="Nombre" class="form-control" id="nombre" [(ngModel)]="nombre">
+  </div>
+  <div class="mb-3">
+    <i class="bi bi-envelope"></i>
+    <input type="email" placeholder="Correo Electrónico" class="form-control" id="correo" [(ngModel)]="correo">
+  </div>
+  <div class="mb-3">
+    <i class="bi bi-telephone-fill"></i>
+    <input type="tel" placeholder="Teléfono" class="form-control" id="telefono" [(ngModel)]="telefono">
+  </div>
+  <div class="mb-3">
+    <i class="bi bi-calendar3"></i>
+    <input type="date" placeholder="elegir fecha" class="form-control" id="fecha" [(ngModel)]="fecha">
+  </div>
+  <div class="mb-3">
+    <i class="bi bi-chat"></i>
+    <textarea class="form-control" placeholder="Mensaje" id="mensaje" rows="4" [(ngModel)]="mensaje"></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="enviarDatos()">Enviar</button>
+</form>

@@ -1,0 +1,15 @@
+.form-title{
+    p{
+        color: red;
+    }
+}
+form{
+    >div{
+        display: flex;
+        i{
+            font-size: 25px;
+            color: red;
+            margin-right: 16px;
+        }
+    }
+}

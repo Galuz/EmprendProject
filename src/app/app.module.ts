@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,8 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { ShareIdeasComponent } from './pages/share-ideas/share-ideas.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CardComponent } from './pages/card/card.component';
+import { ContactFormComponent } from './pages/contact-form/contact-form.component';
+import { LocationCardComponent } from './pages/location-card/location-card.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,13 @@ import { CardComponent } from './pages/card/card.component';
     LandingComponent,
     ShareIdeasComponent,
     LoginComponent,
-    CardComponent
+    CardComponent,
+    ContactFormComponent,
+    LocationCardComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AppRoutingModule
   ],
