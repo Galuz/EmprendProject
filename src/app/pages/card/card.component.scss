@@ -1,0 +1,41 @@
+.custom-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 16px;
+  background-color: #fff;
+  width: 297px;
+
+  img{
+      width: 165px;
+      height: 165px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      margin: auto auto 32px auto;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: auto auto 32px auto;
+  }
+
+  .red-line {
+    border: 1px solid red;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 16px;
+    margin: auto auto 32px auto;
+  }
+  .social-icons{
+    i{
+      font-size: 40px;
+    }
+  }
+}
+  
