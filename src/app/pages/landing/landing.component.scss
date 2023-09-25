@@ -34,7 +34,6 @@
     }
   }
 .us-section {
-  height: 450px;
   background-color: #F5F5F5;
   .row{
     margin-left: 80px;
@@ -77,9 +76,8 @@
   }
 }
 .services-section{
-  height: 450px;
+  padding: 80px;
   .services-wrapper{
-    margin: auto 80px auto 80px;
     .red-line {
       border: 2px solid red;
     } 
