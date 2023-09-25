@@ -5,23 +5,23 @@
 <form>
   <div class="mb-3">
     <i class="bi bi-person-fill"></i>
-    <input type="text" placeholder="Nombre" class="form-control" id="nombre" [(ngModel)]="nombre">
+    <input type="text" placeholder="Nombre" class="form-control" id="nombre" [(ngModel)]="nombre" name="firstName">
   </div>
   <div class="mb-3">
     <i class="bi bi-envelope"></i>
-    <input type="email" placeholder="Correo Electrónico" class="form-control" id="correo" [(ngModel)]="correo">
+    <input type="email" placeholder="Correo Electrónico" class="form-control" id="correo" [(ngModel)]="correo" name="email">
   </div>
   <div class="mb-3">
     <i class="bi bi-telephone-fill"></i>
-    <input type="tel" placeholder="Teléfono" class="form-control" id="telefono" [(ngModel)]="telefono">
+    <input type="tel" placeholder="Teléfono" class="form-control" id="telefono" [(ngModel)]="telefono" name="phone">
   </div>
   <div class="mb-3">
     <i class="bi bi-calendar3"></i>
-    <input type="date" placeholder="elegir fecha" class="form-control" id="fecha" [(ngModel)]="fecha">
+    <input type="date" placeholder="elegir fecha" class="form-control" id="fecha" [(ngModel)]="fecha" name="date">
   </div>
   <div class="mb-3">
     <i class="bi bi-chat"></i>
-    <textarea class="form-control" placeholder="Mensaje" id="mensaje" rows="4" [(ngModel)]="mensaje"></textarea>
+    <textarea class="form-control" placeholder="Mensaje" id="mensaje" rows="4" [(ngModel)]="mensaje" name="message"></textarea>
   </div>
   <button type="button" class="btn btn-primary" (click)="enviarDatos()">Enviar</button>
 </form>
