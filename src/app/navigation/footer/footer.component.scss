@@ -1,0 +1,44 @@
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+  }
+  
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 41px;
+    color: white;
+    i{
+      color: red;
+    }
+  }
+  
+  .red-line {
+    border-top: 2px solid red;
+  }
+  
+  .icon-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    i{
+      font-size: 24px;
+    }
+  }
+  .contact{
+    i{
+      font-size: 32px;
+    }
+  }
+  .social-icons {
+    text-align: center;
+    background-color: #fe6261;
+  
+    i {
+      color: white;
+      font-size: 16px;
+      margin: 0 10px;
+    }
+  }
+  
