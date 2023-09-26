@@ -1,27 +1,33 @@
 .mapa{
-    height: 300px;
+  height: 300px;
 }
 .card{
-    padding: 16px;
-    background-color: #333333;
-    .card-body{
-        .card-title{
-            color: white;
-        }
-        .red-line{
-             color: #fe6261;
-             opacity: unset;
-        }
-        .align-items-center{
-            i{
-                font-size: 24px;
-                color: #fe6261;
-                margin-right: 16px;
-            }
-            p{
-                color: white;
-                margin: 0;
-            }
-        }
+  padding: 16px;
+  background-color: #333333;
+  .card-body{
+    .card-title{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 21px;
+      color: #efefef;
     }
+    .red-line{
+      color: #fe6261;
+      opacity: unset;
+    }
+    .align-items-center{
+      i{
+        font-size: 24px;
+        color: #fe6261;
+        margin-right: 16px;
+      }
+      p{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: #efefef;
+        margin: 0;
+      }
+    }
+  }
 }
