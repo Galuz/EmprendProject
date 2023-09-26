@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <img src="ruta-a-tu-logo.png" alt="Logo" class="img-fluid mb-4" />
+        <div class="mb-3">
+          <label for="usuario" class="form-label">Usuario</label>
+          <input type="text" class="form-control" id="usuario" [(ngModel)]="usuario">
+        </div>
+        <div class="mb-3">
+          <label for="contrasena" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="contrasena" [(ngModel)]="contrasena">
+        </div>
+        <button class="btn btn-primary" (click)="enviar()">Enviar</button>
+      </div>
+    </div>
+  </div>
