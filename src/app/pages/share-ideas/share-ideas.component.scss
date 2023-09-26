@@ -1,0 +1,26 @@
+.navbar {
+    margin-bottom: 20px;
+  }
+  
+  .idea-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-picture img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .idea-content {
+    flex-grow: 1;
+  }
+  
+  .idea-footer {
+    font-size: 0.8rem;
+    color: #777;
+  }
+  
