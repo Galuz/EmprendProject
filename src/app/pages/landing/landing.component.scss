@@ -132,6 +132,25 @@
 }
 .team-force{
   padding: 120px 80px;
+  h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: #333333;
+    margin-bottom: 24px;
+  }
+  hr{
+    margin-top: 0;
+    margin-bottom: 24px;
+    border: 1px solid #fe6261;
+  }
+  p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: #333333;
+    margin-bottom: 48px;
+  }
 }
 .contact{
   padding: 90px 80px;
