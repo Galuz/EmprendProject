@@ -4,7 +4,7 @@
     background-size: cover;
     background-position: center;
     height: 490px;
-    color: white;
+    color: #efefef;
   
     .overlay {
       position: absolute;
@@ -36,7 +36,7 @@
     }
   }
 .us-section {
-  background-color: #F5F5F5;
+  background-color: #efefef;
   @media (min-width: 768px) {
     .row{
       margin-left: calc(80px - 12px);
@@ -47,25 +47,27 @@
   }
   .col-md-6 {
     h2 {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .red-line {
-      border: 2px solid red;
-      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      border-bottom: 1px solid #fe6261;
+      margin-bottom: 32px;
     }
 
     p {
-      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      margin-bottom: 32px;
     }
 
     .btn-danger {
-      background-color: red;
-      color: white;
+      background-color: #fe6261;
+      color: #efefef;
       display: flex;
       align-items: center;
+      border-radius: unset;
+      border: none;
 
       i {
         margin-right: 5px;
