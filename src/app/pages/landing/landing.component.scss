@@ -3,7 +3,7 @@
     background-image: url('../../../assets/images/bg-header.webp');
     background-size: cover;
     background-position: center;
-    height: 400px;
+    height: 490px;
     color: white;
   
     .overlay {
@@ -18,18 +18,20 @@
     .text-wrapper {
       z-index: 1;
       h1 {
-        font-size: 2.5rem;
-        color: white;
-      }
-  
-      .red-line {
-        border-top: 2px solid red;
-        width: 50px;
-        margin: 10px auto;
-      }
+        font-family: 'Poppins', sans-serif;
+        font-weight: 900;
+        font-size: 42px;
+        color: #efefef;
+        border-bottom: 1px solid #fe6261;
+        margin-bottom: 16px;
+      }      
   
       p {
-        font-size: 1.2rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: #efefef;
+        margin-bottom: 0;
       }
     }
   }
