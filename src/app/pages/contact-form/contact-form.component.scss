@@ -1,19 +1,36 @@
 .form-title{
+    h3{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #333333;
+      margin-bottom: 24px;
+    }
     p{
-        color: red;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      color: #fe6261;
+      margin-bottom: 32px;
     }
 }
 form{
-    >div{
-        display: flex;
-        i{
-            font-size: 25px;
-            color: red;
-            margin-right: 16px;
-        }
+  >div{
+    display: flex;
+    i{
+        font-size: 25px;
+        color: red;
+        margin-right: 16px;
     }
-    .btn{
-        background-color: #fe6261;
-        color: white;
+    input::placeholder,
+    textarea::placeholder {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 11px;
     }
+  }
+  .btn{
+    background-color: #fe6261;
+    color: white;
+  }
 }

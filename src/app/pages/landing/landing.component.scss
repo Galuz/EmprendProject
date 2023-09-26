@@ -185,5 +185,19 @@
 .contact{
   padding: 90px 80px;
   background-color: #F5F5F5;
+  h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: #333333;
+    margin-bottom: 24px;
+  }
+  .red-line{
+    margin: 0;
+    border: 0;
+    opacity: unset;
+    border-bottom: 1px solid #fe6261;
+    margin-bottom: 80px;
+  }
 }
   
