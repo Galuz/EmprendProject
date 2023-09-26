@@ -99,7 +99,7 @@
       text-align: center;
       i{
         font-size: 40px;
-        color: red;
+        color: #fe6261;
       }
       p{
         font-family: 'Poppins', sans-serif;
@@ -113,11 +113,22 @@
 .features-section{
   padding: 90px 80px;
   background-color: #F5F5F5;
+  .features-title{
+    margin-bottom: 80px;
+    h2{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #333333;
+      border-bottom: 1px solid #fe6261;
+      margin: 0;
+    }
+  }
   .caracteristica{
     margin-bottom: 48px;  
     i{
       font-size: 40px;
-      color: red;
+      color: #fe6261;
     }
     &:last-child{
       margin-bottom: 0;
@@ -128,7 +139,14 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 900;
         font-size: 16px;
-        color: red;
+        color: #fe6261;
+      }
+      p{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        color: #333333;
+        margin-bottom: 0;
       }
     }
   }
