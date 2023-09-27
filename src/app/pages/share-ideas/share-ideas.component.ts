@@ -28,6 +28,9 @@ export class ShareIdeasComponent implements OnInit {
   user: any; 
   newComment: string = '';
   isAllComments: boolean = true;
+  currentPage: number = 1;
+  totalPages = 10;
+  paginationLinks: any;
 
   constructor(private userService: UserService) { }
 
@@ -39,7 +42,7 @@ export class ShareIdeasComponent implements OnInit {
     if (this.isAllComments) {
       this.userService.getAllComments().subscribe(
         response => {
-          // Asumiendo que los comentarios están dentro de response.data
+          console.log(response)
           this.ideas = response.data.map((comment: Comment) => ({
             texto: comment.body,
             fecha: comment.created_at,
@@ -81,5 +84,17 @@ export class ShareIdeasComponent implements OnInit {
         error => console.error('Error añadiendo comentario:', error)
       );
     }
+  }
+
+  previousPage(){
+    console.log('previous');
+  }
+
+  nextPage(){
+    console.log('next');
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
   }
 }
