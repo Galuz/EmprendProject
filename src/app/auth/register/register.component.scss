@@ -35,6 +35,17 @@
         background-color: #fe6261;
         color: #efefef;
     }
+    .navigate-login{
+      span,a{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: #efefef;
+      }
+      a:hover{
+        color: #fe6261;
+      }
+    }
     .error-message {
       color: red;
       font-weight: bold;
