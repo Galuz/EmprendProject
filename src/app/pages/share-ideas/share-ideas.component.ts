@@ -31,6 +31,7 @@ export class ShareIdeasComponent implements OnInit {
   currentPage: number = 1;
   totalPages = 10;
   paginationLinks: any;
+  showPagination: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -55,12 +56,14 @@ export class ShareIdeasComponent implements OnInit {
           }));
           this.totalPages = response.meta.last_page;
           this.paginationLinks = response.links;
+          this.showPagination = true;
         },
         error => console.error('Error obteniendo todos los comentarios:', error)
       );
     } else {
       this.userService.getUser().subscribe(
         response => {
+          console.log('my comments',response)
           this.user = response.data;
           if (this.user && Array.isArray(this.user.comments)) {
             this.ideas = this.user.comments.map((comment: Comment) => ({
@@ -69,6 +72,7 @@ export class ShareIdeasComponent implements OnInit {
               usuario: comment.user.name
             }));
           }
+          this.showPagination = false;
         },
         error => console.error('Error obteniendo datos del usuario:', error)
       );
