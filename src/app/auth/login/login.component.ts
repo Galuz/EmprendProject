@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,17 @@ export class LoginComponent {
   contrasena: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   enviar() {
     this.errorMessage = '';
     this.authService.login(this.usuario, this.contrasena).subscribe(
       (response) => {
         console.log('Login exitoso:', response);
+        if(response.data && response.data.api_token) {
+          localStorage.setItem('api_token', response.data.api_token);
+          this.router.navigate(['/share']);
+        }
       },
       (error) => {
         console.error('Error en el login:', error);

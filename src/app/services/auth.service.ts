@@ -18,4 +18,9 @@ export class AuthService {
     const body = { email, password }; 
     return this.http.post(`${this.apiUrl}/login`, body);
   }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('api_token');
+    return !!token;
+  }
 }
