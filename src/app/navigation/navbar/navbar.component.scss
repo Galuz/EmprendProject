@@ -1,11 +1,30 @@
-.navbar-brand{
-  .logo{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 900;
-    font-size: 26px;
-    color: #333333;
-    i{
-      color: #fe6261;
+.navbar{
+  .navbar-brand{
+    .logo{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #333333;
+      i{
+        color: #fe6261;
+      }
+    }
+  }
+  .navbar-nav{
+    .nav-link{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: #333333;
+      &:hover{
+        color: #fe6261;
+      }
+    }
+    .login{
+      background-color: #fe6261;
+      a{
+        color: #efefef;
+      }
     }
   }
 }
