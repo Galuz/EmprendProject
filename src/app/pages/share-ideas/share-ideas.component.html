@@ -10,10 +10,12 @@
       <div>nombre de usuario </div>
     </div>
   </nav>
-  <div class="container mt-4">
-    <h2 style="border-bottom: 2px solid red;">Comparte tu idea</h2>
+  <div class="container share-ideas-box d-flex flex-column p-0">
+    <h2 class="mb-4">Comparte tu idea</h2>
     <textarea class="form-control" rows="5"></textarea>
-    <button class="btn btn-primary mt-3">Share</button>
+    <button class="btn mt-4 ms-auto">
+      Share <i class="bi bi-arrow-right"></i>
+    </button>
   </div>
   <div class="ideas-wapprer container mt-4">
     <div class="idea-item" *ngFor="let idea of ideas">

@@ -1,7 +1,28 @@
 .share-ideas{
   background-color: #efefef;
+  padding-bottom: 48px;
   .navbar {
     margin-bottom: 20px;
+  }
+  .share-ideas-box{
+    margin-top: 80px;
+    h2{
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #333333;
+      border: unset;
+      border-bottom: 1px solid red;
+    }
+    button{
+      background-color: #fe6261;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 24px;
+      color: #efefef;
+      border-radius: 0;
+      border: unset;
+    }
   }
   .ideas-wapprer{
     background-color: #333333;
