@@ -33,6 +33,6 @@ export class UserService {
   }
   
   addComment(body: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/comments`, { body });
+    return this.http.post(`${this.apiUrl}/comments`, { body }, this.getHeaders());
   }
 }
