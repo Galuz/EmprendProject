@@ -25,11 +25,15 @@ export class UserService {
   }
 
   getUserComments(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/comments`);
+    return this.http.get(`${this.apiUrl}/user/comments`, this.getHeaders());
+  }
+
+  getCommentById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/comments/${id}`, this.getHeaders());
   }
   
   getAllComments(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/comments`);
+    return this.http.get(`${this.apiUrl}/comments`, this.getHeaders());
   }
   
   addComment(body: string): Observable<any> {
