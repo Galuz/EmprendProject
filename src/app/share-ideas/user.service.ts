@@ -35,4 +35,12 @@ export class UserService {
   addComment(body: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/comments`, { body }, this.getHeaders());
   }
+  
+  updateComment(id: number, body: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/comments/${id}`, { body }, this.getHeaders());
+  }
+
+  deleteComment(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/comments/${id}`, this.getHeaders());
+  }
 }

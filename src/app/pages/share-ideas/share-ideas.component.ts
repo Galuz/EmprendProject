@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/share-ideas/user.service';
 
 interface Comment {
+  id: number;
   body: string;
   created_at: string;
   user: {
@@ -20,6 +21,7 @@ export class ShareIdeasComponent implements OnInit {
   
   ideas = [
     {
+      id: 1,
       texto: '',
       fecha: '',
       usuario: ''
@@ -49,6 +51,7 @@ export class ShareIdeasComponent implements OnInit {
         // Almacena los comentarios del usuario en la variable userComments
         if (response.data && Array.isArray(response.data.comments)) {
           this.userComments = response.data.comments.map((comment: Comment) => ({
+            id: comment.id,
             texto: comment.body,
             fecha: comment.created_at,
             usuario: comment.user.name
@@ -70,6 +73,7 @@ export class ShareIdeasComponent implements OnInit {
         response => {
           console.log(response)
           this.ideas = response.data.map((comment: Comment) => ({
+            id: comment.id,
             texto: comment.body,
             fecha: comment.created_at,
             usuario: comment.user.name
@@ -102,6 +106,25 @@ export class ShareIdeasComponent implements OnInit {
         error => console.error('Error añadiendo comentario:', error)
       );
     }
+  }
+
+  updateComment(id: number, body: string): void {
+    this.userService.updateComment(id, body).subscribe(
+      response => console.log('Comentario actualizado:', response),
+      error => console.error('Error actualizando comentario:', error)
+    );
+  }
+
+  deleteComment(id: number): void {
+    this.userService.deleteComment(id).subscribe(
+      response => {
+        console.log('Comentario eliminado:', response);
+        // Aquí podrías también quitar el comentario de tu lista local de comentarios, 
+        // o volver a cargar los comentarios si lo prefieres.
+        this.loadComments();
+      },
+      error => console.error('Error eliminando comentario:', error)
+    );
   }
 
   previousPage() {

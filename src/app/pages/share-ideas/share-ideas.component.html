@@ -42,6 +42,8 @@
         <p>{{ idea.fecha }}</p>
         <p>{{ idea.usuario }}</p>
       </div>
+      <button (click)="updateComment(idea.id, newComment)">Actualizar</button>
+      <button (click)="deleteComment(idea.id)">Eliminar</button>
     </div>
   </div>
   <div class="pagination-wrapper container mt-4" *ngIf="showPagination">
