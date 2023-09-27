@@ -12,8 +12,8 @@
   </nav>
   <div class="container share-ideas-box d-flex flex-column p-0">
     <h2 class="mb-4">Comparte tu idea</h2>
-    <textarea class="form-control" rows="5"></textarea>
-    <button class="btn mt-4 ms-auto">
+    <textarea class="form-control" rows="5" [(ngModel)]="newComment"></textarea>
+    <button class="btn mt-4 ms-auto" (click)="shareComment()">
       Share <i class="bi bi-arrow-right"></i>
     </button>
   </div>

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/share-ideas/user.service';
 
 @Component({
   selector: 'app-share-ideas',
   templateUrl: './share-ideas.component.html',
   styleUrls: ['./share-ideas.component.scss']
 })
-export class ShareIdeasComponent {
+
+export class ShareIdeasComponent implements OnInit {
   ideas = [
     {
       texto: 'Mi idea es una “Camara Verrgud’, te la pegas en la cara y puedes estar grabando todo sin que tengas que estar agarrando un teléfono, cdmara, etc. Seria ideal para los      conciertos y/ o eventos publicos asi puedes disfrutar del concierto y estar grabando      sin tener que estar con tu teléfono todo el tiempo. Si no también podria servir para espionaje.',
@@ -17,6 +19,46 @@ export class ShareIdeasComponent {
       fecha: '2023-09-24',
       usuario: 'Usuario 2'
     },
-    // Agrega más ideas aquí
   ];
+  user: any; 
+  newComment: string = '';
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getUser().subscribe(
+      data => {
+        this.user = data;
+        console.log('Datos del usuario:', data);
+      },
+      error => console.error('Error obteniendo datos del usuario:', error)
+    );
+
+    /* this.userService.getUserComments().subscribe(
+      data => {
+        console.log('Comentarios del usuario:', data);
+      },
+      error => console.error('Error obteniendo comentarios del usuario:', error)
+    );
+    
+    this.userService.getAllComments().subscribe(
+      data => {
+        this.ideas = data;
+        console.log('Todos los comentarios:', data);
+      },
+      error => console.error('Error obteniendo todos los comentarios:', error)
+    ); */
+  }
+  shareComment(): void {
+    if (this.newComment) {
+      this.userService.addComment(this.newComment).subscribe(
+        data => {
+          console.log('Comentario añadido:', data);
+          this.ideas.push(data); // Añadir el nuevo comentario a la lista de ideas
+          this.newComment = ''; // Limpiar el textarea
+        },
+        error => console.error('Error añadiendo comentario:', error)
+      );
+    }
+  }
 }
