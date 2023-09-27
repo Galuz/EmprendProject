@@ -32,11 +32,31 @@ export class ShareIdeasComponent implements OnInit {
   totalPages = 10;
   paginationLinks: any;
   showPagination: boolean = false;
+  userComments: any;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.loadUser(); 
     this.loadComments();
+  }
+
+  loadUser(): void {
+    this.userService.getUser().subscribe(
+      response => {
+        console.log('User data',response)
+        this.user = response.data;
+        // Almacena los comentarios del usuario en la variable userComments
+        if (response.data && Array.isArray(response.data.comments)) {
+          this.userComments = response.data.comments.map((comment: Comment) => ({
+            texto: comment.body,
+            fecha: comment.created_at,
+            usuario: comment.user.name
+          }));
+        }
+      },
+      error => console.error('Error obteniendo datos del usuario:', error)
+    );
   }
 
   loadPage(page: number): void {
@@ -61,21 +81,8 @@ export class ShareIdeasComponent implements OnInit {
         error => console.error('Error obteniendo todos los comentarios:', error)
       );
     } else {
-      this.userService.getUser().subscribe(
-        response => {
-          console.log('my comments',response)
-          this.user = response.data;
-          if (this.user && Array.isArray(this.user.comments)) {
-            this.ideas = this.user.comments.map((comment: Comment) => ({
-              texto: comment.body,
-              fecha: comment.created_at,
-              usuario: comment.user.name
-            }));
-          }
-          this.showPagination = false;
-        },
-        error => console.error('Error obteniendo datos del usuario:', error)
-      );
+      this.ideas = [...this.userComments];
+      this.showPagination = false;
     }
   }
 
