@@ -1,10 +1,10 @@
 <div class="register d-flex">
     <div class="m-auto d-flex flex-column">
       <!-- Logo -->
-      <div class="logo">
+      <a routerLink="/" class="logo">
         <i class="bi bi-compass-fill"></i>
         emprenD
-      </div>
+      </a>
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
