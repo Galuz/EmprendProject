@@ -50,6 +50,16 @@
         width: 100%;
         padding: 32px;
         background-color: #efefef;
+        >div{
+          flex-shrink: 0;
+          button{
+            border: unset;
+            i{
+              font-size: 18px;
+              color: #fe6261;
+            }
+          }
+        }
         p{
           font-family: 'Poppins', sans-serif;
           font-weight: 300;

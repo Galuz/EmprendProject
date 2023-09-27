@@ -34,18 +34,20 @@
         <div class="profile">
           <i class="bi bi-person-fill"></i>
         </div>
-        <div *ngIf="!idea.editing" class="idea-content">
-          <p>{{ idea.texto }}</p>
+        <div class="idea-content d-flex">
+          <p *ngIf="!idea.editing">{{ idea.texto }}</p>
+          <input *ngIf="idea.editing" [(ngModel)]="idea.texto" class="form-control" />
+          <div class="ms-auto my-auto">
+            <button *ngIf="!idea.editing" (click)="editComment(idea)"><i class="bi bi-pencil-fill"></i></button>
+            <button *ngIf="idea.editing" (click)="saveComment(idea)"><i class="bi bi-floppy-fill"></i></button>
+            <button (click)="deleteComment(idea.id)"><i class="bi bi-trash-fill"></i></button>
+          </div>
         </div>
-        <input *ngIf="idea.editing" [(ngModel)]="idea.texto" class="form-control" />
       </div>
       <div class="idea-footer justify-content-end">
         <p>{{ idea.fecha }}</p>
         <p>{{ idea.usuario }}</p>
       </div>
-      <button *ngIf="!idea.editing" (click)="editComment(idea)">Actualizar</button>
-      <button *ngIf="idea.editing" (click)="saveComment(idea)">Guardar</button>
-      <button (click)="deleteComment(idea.id)">Eliminar</button>
     </div>
   </div>
   <div class="pagination-wrapper container mt-4" *ngIf="showPagination">
