@@ -14,10 +14,7 @@
       <input type="password" class="form-control" id="contrasena" [(ngModel)]="contrasena">
     </div>
     <button class="btn ms-auto" (click)="enviar()">
-      {{ modoRegistro ? 'Registrarse' : 'Iniciar Sesión' }} <i class="bi bi-arrow-right"></i>
+      Iniciar sesion <i class="bi bi-arrow-right"></i>
     </button>
-    <p (click)="toggleModoRegistro()" class="mt-3 cursor-pointer">
-      {{ modoRegistro ? '¿Ya tienes una cuenta? Inicia sesión aquí.' : '¿No tienes una cuenta? Regístrate aquí.' }}
-    </p>
   </div>
 </div>

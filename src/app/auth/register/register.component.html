@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="register d-flex">
+    <div class="m-auto d-flex flex-column">
+      <!-- Logo -->
+      <div class="logo">
+        <i class="bi bi-compass-fill"></i>
+        emprenD
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div class="wrapper mb-3 d-flex flex-column">
+        <label for="user" class="form-label ms-auto">Usuario</label>
+        <input type="text" class="form-control" id="user" [(ngModel)]="user">
+      </div>
+      <div class="wrapper mb-3 d-flex flex-column">
+        <label for="email" class="form-label ms-auto">correo</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="email">
+      </div>
+      <div class="wrapper mb-4 d-flex flex-column">
+        <label for="password" class="form-label ms-auto">Contraseña</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="password">
+      </div>
+      <div class="wrapper mb-4 d-flex flex-column">
+        <label for="password2" class="form-label ms-auto">Confirmar Contraseña</label>
+        <input type="password2" class="form-control" id="password2" [(ngModel)]="password2">
+      </div>
+      <button class="btn ms-auto" (click)="enviar()">
+        Registrate <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  

@@ -1,0 +1,43 @@
+.register{
+    background-color: #333333;
+    height: 100vh;
+    .logo{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 900;
+        font-size: 42px;
+        color: #efefef;
+        text-align: center;
+        i{
+            color: #fe6261;
+        }
+    }
+    .wrapper{
+        width: 100%;
+        @media (min-width: 768px) {
+          .row{
+            width: 400px;
+          }
+        }
+        label{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 11px;
+            color: #efefef;
+        }
+        input{
+            border-radius: unset;
+        }
+    }
+    .btn{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        background-color: #fe6261;
+        color: #efefef;
+    }
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }

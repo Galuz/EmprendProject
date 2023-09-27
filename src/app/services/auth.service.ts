@@ -9,9 +9,9 @@ export class AuthService {
   private apiUrl = 'http://localhost:8000/api'; 
   constructor(private http: HttpClient) { }
 
-  register(usuario: string, contrasena: string): Observable<any> {
-    const body = { usuario, contrasena };
-    return this.http.post(`${this.apiUrl}/register`, body);
+  register(userData: any): Observable<any> {
+    const url = `${this.apiUrl}/register`;
+    return this.http.post(url, userData);
   }
 
   login(usuario: string, contrasena: string): Observable<any> {
