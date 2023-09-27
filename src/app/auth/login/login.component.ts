@@ -21,6 +21,21 @@ export class LoginComponent {
     console.log("simon")
     if (this.modoRegistro) {
       // Lógica para registro
+      this.authService.register(this.usuario, this.contrasena).subscribe(
+        (response) => {
+          // Manejar la respuesta exitosa aquí
+          console.log('Registrado con éxito:', response);
+
+          // Aquí puedes, por ejemplo, redirigir al usuario al login o a la página principal
+          this.modoRegistro = false; // Cambiar a modo de login
+        },
+        (error) => {
+          // Manejar el error aquí
+          console.error('Error durante el registro:', error);
+          
+          // Puedes mostrar un mensaje de error al usuario, por ejemplo.
+        }
+      );
     } else {
       // Lógica para inicio de sesión
       this.authService.login(this.usuario, this.contrasena).subscribe(

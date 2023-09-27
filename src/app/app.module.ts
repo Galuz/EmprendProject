@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { CardComponent } from './pages/card/card.component';
 import { ContactFormComponent } from './pages/contact-form/contact-form.component';
 import { LocationCardComponent } from './pages/location-card/location-card.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LocationCardComponent } from './pages/location-card/location-card.compo
     LoginComponent,
     CardComponent,
     ContactFormComponent,
-    LocationCardComponent
+    LocationCardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

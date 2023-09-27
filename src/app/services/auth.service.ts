@@ -6,9 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'URL_DEL_BACKEND_API'; // Reemplaza con la URL de tu API
+  private apiUrl = 'http://localhost:8000/api'; // Reemplaza con la URL de tu API
 
   constructor(private http: HttpClient) { }
+
+  register(usuario: string, contrasena: string): Observable<any> {
+    const body = { usuario, contrasena };
+    return this.http.post(`${this.apiUrl}/register`, body);
+  }
 
   login(usuario: string, contrasena: string): Observable<any> {
     const body = { usuario, contrasena };
