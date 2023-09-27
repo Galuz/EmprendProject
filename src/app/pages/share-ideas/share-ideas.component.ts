@@ -27,9 +27,9 @@ export class ShareIdeasComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUser().subscribe(
-      data => {
-        this.user = data;
-        console.log('Datos del usuario:', data);
+      response => {
+        this.user = response.data;
+        console.log('Datos del usuario:', this.user);
       },
       error => console.error('Error obteniendo datos del usuario:', error)
     );
@@ -49,7 +49,7 @@ export class ShareIdeasComponent implements OnInit {
       error => console.error('Error obteniendo todos los comentarios:', error)
     ); */
   }
-  
+
   shareComment(): void {
     if (this.newComment) {
       this.userService.addComment(this.newComment).subscribe(
