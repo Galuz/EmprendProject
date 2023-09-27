@@ -48,30 +48,13 @@ export class ShareIdeasComponent implements OnInit {
       },
       error => console.error('Error obteniendo datos del usuario:', error)
     );
-
-    /* this.userService.getCommentById(this.user.id).subscribe(
-      data => {
-        console.log('Comentario obtenido:', data);
-      },
-      error => console.error('Error obteniendo el comentario:', error)
-    ); */
-
-
-    /* this.userService.getUserComments().subscribe(
-      data => {
-        console.log('Comentarios del usuario:', data);
-      },
-      error => console.error('Error obteniendo comentarios del usuario:', error)
-    ); */
     
-    
-    /* this.userService.getAllComments().subscribe(
-      data => {
-        this.ideas = data;
-        console.log('Todos los comentarios:', data);
+    this.userService.getAllComments().subscribe(
+      response => {
+        console.log('Todos los comentarios:', response);
       },
       error => console.error('Error obteniendo todos los comentarios:', error)
-    ); */
+    );
   }
 
   shareComment(): void {
