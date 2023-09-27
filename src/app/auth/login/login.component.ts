@@ -9,24 +9,19 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   usuario: string = '';
   contrasena: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService) { }
 
   enviar() {
-    console.log("simon inicio de sesion")
-    // Lógica para inicio de sesión
+    this.errorMessage = '';
     this.authService.login(this.usuario, this.contrasena).subscribe(
       (response) => {
-        // Manejar la respuesta exitosa aquí
-        console.log('Respuesta del servidor:', response);
-
-        // Redirigir al usuario o realizar otras acciones necesarias después del inicio de sesión exitoso.
+        console.log('Login exitoso:', response);
       },
       (error) => {
-        // Manejar el error aquí
-        console.error('Error:', error);
-
-        // Puedes mostrar un mensaje de error al usuario, por ejemplo.
+        console.error('Error en el login:', error);
+        this.errorMessage = error.error?.message || 'Error durante el inicio de sesión';
       }
     );
   }
