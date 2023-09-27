@@ -1,8 +1,27 @@
 .share-ideas{
   background-color: #efefef;
   padding-bottom: 48px;
+  min-height: 100vh;
   .navbar {
     margin-bottom: 20px;
+    .navbar-brand{
+      .logo{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 900;
+        font-size: 26px;
+        color: #333333;
+        i{
+          color: #fe6261;
+        }
+      }
+    }
+    .user-name{
+      background-color: #fe6261;
+      min-width: 200px;
+      p{
+        color: #efefef;
+      }
+    }
   }
   .share-ideas-box{
     margin-top: 80px;
@@ -12,7 +31,7 @@
       font-size: 26px;
       color: #333333;
       border: unset;
-      border-bottom: 1px solid red;
+      border-bottom: 1px solid #fe6261;
     }
     button{
       background-color: #fe6261;
@@ -70,8 +89,6 @@
       }
       .idea-footer {
         display: flex;
-        font-size: 0.8rem;
-        color: #777;
         margin-top: 8px;
         p{
           margin-bottom: 0;
@@ -85,6 +102,21 @@
             margin-right: 16px;
           }
         }
+      }
+    }
+  }
+  .pagination-wrapper{
+    .page-link{
+      color: #fe6261;
+      &:focus{
+        box-shadow: none;
+      }
+    }
+    .active{
+      >.page-link{
+        background-color: #333333;
+        border-color: #333333;
+        color: #efefef;
       }
     }
   }
