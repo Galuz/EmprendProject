@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,19 @@ import { Observable } from 'rxjs';
 export class UserService {
   private apiUrl = 'http://localhost:8000/api'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  private getHeaders(): { headers: HttpHeaders } {
+    const token = this.authService.getToken();
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
 
   getUser(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user`);
+    return this.http.get(`${this.apiUrl}/user`, this.getHeaders());
   }
 
   getUserComments(): Observable<any> {

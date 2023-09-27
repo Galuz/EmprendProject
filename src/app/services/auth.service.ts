@@ -23,4 +23,8 @@ export class AuthService {
     const token = localStorage.getItem('api_token');
     return !!token;
   }
+
+  getToken(): string | null {
+    return localStorage.getItem('api_token');
+  }
 }

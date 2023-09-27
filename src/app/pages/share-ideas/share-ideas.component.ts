@@ -49,13 +49,14 @@ export class ShareIdeasComponent implements OnInit {
       error => console.error('Error obteniendo todos los comentarios:', error)
     ); */
   }
+  
   shareComment(): void {
     if (this.newComment) {
       this.userService.addComment(this.newComment).subscribe(
         data => {
           console.log('Comentario añadido:', data);
-          this.ideas.push(data); // Añadir el nuevo comentario a la lista de ideas
-          this.newComment = ''; // Limpiar el textarea
+          this.ideas.push(data);
+          this.newComment = '';
         },
         error => console.error('Error añadiendo comentario:', error)
       );
