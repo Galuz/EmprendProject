@@ -24,7 +24,8 @@ export class ShareIdeasComponent implements OnInit {
       id: 1,
       texto: '',
       fecha: '',
-      usuario: ''
+      usuario: '',
+      editing: false
     },
   ];
   user: any; 
@@ -113,6 +114,15 @@ export class ShareIdeasComponent implements OnInit {
       response => console.log('Comentario actualizado:', response),
       error => console.error('Error actualizando comentario:', error)
     );
+  }
+
+  editComment(idea: any): void {
+    idea.editing = true;
+  }
+
+  saveComment(idea: any): void {
+    idea.editing = false;
+    this.updateComment(idea.id, idea.texto);
   }
 
   deleteComment(id: number): void {

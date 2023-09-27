@@ -34,15 +34,17 @@
         <div class="profile">
           <i class="bi bi-person-fill"></i>
         </div>
-        <div class="idea-content">
+        <div *ngIf="!idea.editing" class="idea-content">
           <p>{{ idea.texto }}</p>
         </div>
+        <input *ngIf="idea.editing" [(ngModel)]="idea.texto" class="form-control" />
       </div>
       <div class="idea-footer justify-content-end">
         <p>{{ idea.fecha }}</p>
         <p>{{ idea.usuario }}</p>
       </div>
-      <button (click)="updateComment(idea.id, newComment)">Actualizar</button>
+      <button *ngIf="!idea.editing" (click)="editComment(idea)">Actualizar</button>
+      <button *ngIf="idea.editing" (click)="saveComment(idea)">Guardar</button>
       <button (click)="deleteComment(idea.id)">Eliminar</button>
     </div>
   </div>
