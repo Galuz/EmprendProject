@@ -17,6 +17,17 @@
       Share <i class="bi bi-arrow-right"></i>
     </button>
   </div>
+  <div class="container p-0">
+    <div class="dropdown my-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar Comentarios
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" (click)="commentFilter = true">Ver todos los comentarios</a></li>
+        <li><a class="dropdown-item" (click)="commentFilter = false">Ver solo mis comentarios</a></li>
+      </ul>
+    </div>
+  </div>
   <div class="ideas-wapprer container mt-4">
     <div class="idea-item" *ngFor="let idea of ideas">
       <div class="d-flex">

@@ -22,6 +22,7 @@ export class ShareIdeasComponent implements OnInit {
   ];
   user: any; 
   newComment: string = '';
+  commentFilter: boolean = false;
 
   constructor(private userService: UserService) { }
 
