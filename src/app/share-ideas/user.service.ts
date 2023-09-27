@@ -24,10 +24,6 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/user`, this.getHeaders());
   }
 
-  getUserComments(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/comments`, this.getHeaders());
-  }
-
   getCommentById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/comments/${id}`, this.getHeaders());
   }

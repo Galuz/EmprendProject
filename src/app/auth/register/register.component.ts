@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,10 +14,10 @@ export class RegisterComponent {
   password2: string = '';
   errorMessage: string = ''; 
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   enviar() {
-    this.errorMessage = ''; // Resetear el mensaje de error antes de cada intento de registro
+    this.errorMessage = ''; 
 
     if (this.password !== this.password2) {
       this.errorMessage = 'Las contraseñas no coinciden';
@@ -32,12 +33,11 @@ export class RegisterComponent {
 
     this.authService.register(userData).subscribe(
       (response) => {
-        console.log('Usuario registrado con éxito', response);
-        // Aquí podrías redirigir al usuario o hacer otras acciones necesarias.
+        localStorage.setItem('api_token', response.data.api_token);
+        this.router.navigate(['/share']);
       },
       (error) => {
         console.error('Error registrando usuario', error);
-        // Si hay un mensaje de error en la respuesta de la API, úsalo, de lo contrario, usa un mensaje de error genérico
         this.errorMessage = error.error?.message || 'Error registrando usuario'; 
       }
     );
