@@ -38,9 +38,14 @@ export class ShareIdeasComponent implements OnInit {
     this.loadComments();
   }
 
+  loadPage(page: number): void {
+    this.currentPage = page;
+    this.loadComments();
+  }
+
   loadComments(): void {
     if (this.isAllComments) {
-      this.userService.getAllComments().subscribe(
+      this.userService.getAllComments(this.currentPage).subscribe(
         response => {
           console.log(response)
           this.ideas = response.data.map((comment: Comment) => ({
@@ -48,6 +53,8 @@ export class ShareIdeasComponent implements OnInit {
             fecha: comment.created_at,
             usuario: comment.user.name
           }));
+          this.totalPages = response.meta.last_page;
+          this.paginationLinks = response.links;
         },
         error => console.error('Error obteniendo todos los comentarios:', error)
       );
@@ -86,15 +93,24 @@ export class ShareIdeasComponent implements OnInit {
     }
   }
 
-  previousPage(){
-    console.log('previous');
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadComments();
+    }
   }
-
-  nextPage(){
-    console.log('next');
+  
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadComments();
+    }
   }
-
+  
   goToPage(page: number) {
-    this.currentPage = page;
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadComments();
+    }
   }
 }

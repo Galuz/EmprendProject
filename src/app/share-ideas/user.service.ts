@@ -32,8 +32,8 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/comments/${id}`, this.getHeaders());
   }
   
-  getAllComments(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/comments`, this.getHeaders());
+  getAllComments(page: number = 1): Observable<any> {
+    return this.http.get(`${this.apiUrl}/comments?page=${page}`, this.getHeaders());
   }
   
   addComment(body: string): Observable<any> {
