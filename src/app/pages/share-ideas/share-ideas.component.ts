@@ -32,29 +32,42 @@ export class ShareIdeasComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(
-      response => {
-        this.user = response.data;
-        if (this.user && Array.isArray(this.user.comments)) {
-          this.ideas = this.user.comments.map((comment: Comment) => {
-            return {
+    this.loadComments();
+  }
+
+  loadComments(): void {
+    if (this.isAllComments) {
+      this.userService.getAllComments().subscribe(
+        response => {
+          // Asumiendo que los comentarios están dentro de response.data
+          this.ideas = response.data.map((comment: Comment) => ({
+            texto: comment.body,
+            fecha: comment.created_at,
+            usuario: comment.user.name
+          }));
+        },
+        error => console.error('Error obteniendo todos los comentarios:', error)
+      );
+    } else {
+      this.userService.getUser().subscribe(
+        response => {
+          this.user = response.data;
+          if (this.user && Array.isArray(this.user.comments)) {
+            this.ideas = this.user.comments.map((comment: Comment) => ({
               texto: comment.body,
               fecha: comment.created_at,
               usuario: comment.user.name
-            };
-          });
-          console.log('Ideas:', this.ideas);
-        }
-      },
-      error => console.error('Error obteniendo datos del usuario:', error)
-    );
-    
-    this.userService.getAllComments().subscribe(
-      response => {
-        console.log('Todos los comentarios:', response);
-      },
-      error => console.error('Error obteniendo todos los comentarios:', error)
-    );
+            }));
+          }
+        },
+        error => console.error('Error obteniendo datos del usuario:', error)
+      );
+    }
+  }
+
+  updateComments(value: boolean): void {
+    this.isAllComments = value;
+    this.loadComments();
   }
 
   shareComment(): void {
