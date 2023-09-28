@@ -5,8 +5,11 @@ $font-primary: 'Poppins', sans-serif;
 
 .share-ideas {
   background-color: $color-light;
-  padding-bottom: 48px;
   min-height: 100vh;
+  padding: 16px;
+  @media (min-width: 768px) {
+    padding: 0 0 48px 0;
+  }
   
   .navbar {
     margin-bottom: 20px;
@@ -69,8 +72,11 @@ $font-primary: 'Poppins', sans-serif;
     }
   }
   .ideas-wapprer{
+    padding: 8px;
+    @media (min-width: 768px) {
+      padding: 80px;
+    }
     background-color: $color-secondary;
-    padding: 80px;
     .idea-item {
       margin-bottom: 32px;
       &:last-child{
