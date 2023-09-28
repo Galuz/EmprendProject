@@ -138,6 +138,17 @@ export class ShareIdeasComponent {
     }
   }
 
+  logout(): void {
+    this.authService.logout().subscribe(
+      () => {
+        console.log('Usuario deslogueado exitosamente');
+        this.authService.removeToken();
+        this.router.navigate(['/']);
+      },
+      error => console.error('Error al desloguear el usuario', error)
+    );
+  }
+
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
