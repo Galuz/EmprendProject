@@ -2,201 +2,53 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/share-ideas/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
-interface Comment {
-  id: number;
-  body: string;
-  created_at: string;
-  user: {
-    name: string;
-  };
-}
+import { Comment, UserDataResponse } from 'src/app/interfaces/share-data';
 
 @Component({
   selector: 'app-share-ideas',
   templateUrl: './share-ideas.component.html',
   styleUrls: ['./share-ideas.component.scss']
 })
-export class ShareIdeasComponent implements OnInit {
+export class ShareIdeasComponent {
+  ideas :Comment[] = [];
+  allComments: Comment[] = [];
+  userData: UserDataResponse | null = null;
+  isEditing = false; // Nueva variable para controlar si se está editando
+  editingValue = '';
   
-  ideas: Array<{ id: number; texto: string; fecha: string; usuario?: string; editing?: boolean }> = [];
-  user?: { name: string; comments?: Comment[] };
-  newComment = '';
-  isAllComments = true;
-  currentPage = 1;
-  totalPages = 10;
-  showPagination = false;
-
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.loadUser();
-    this.loadComments();
+  ngOnInit() {
+    this.loadUserData();
+    this.loadAllComments();
   }
 
-  loadUser(): void {
+  loadUserData(){
     this.userService.getUser().subscribe(
       response => {
-        this.user = response.data;
-        if (this.user && this.user?.comments) {
-          this.user.comments = this.user.comments.map(comment => ({
-            ...comment,
-            texto: comment.body,
-            fecha: comment.created_at,
-            usuario: comment.user.name
-          }));
-        }
-      },
-      error => console.error('Error obteniendo datos del usuario:', error)
-    );
-  }
-
-  private transformComments(comments: Comment[]): void {
-    this.ideas = comments.map(comment => ({
-      id: comment.id,
-      texto: comment.body,
-      fecha: comment.created_at,
-      usuario: comment.user.name,
-      editing: false
-    }));
-  }
-
-  loadComments(): void {
-    if (this.isAllComments) {
-      this.userService.getAllComments(this.currentPage).subscribe(
-        response => {
-          this.transformComments(response.data);
-          this.totalPages = response.meta.last_page;
-          this.showPagination = this.totalPages > 1;
-        },
-        error => console.error('Error obteniendo todos los comentarios:', error)
-      );
-    } else {
-      if (this.user && this.user.comments) {
-        this.transformComments(this.user.comments);
-        this.showPagination = false;
+        console.log(response)
+        this.userData = response.data;
       }
-    }
-  }
-
-  updateComments(value: boolean): void {
-    this.isAllComments = value;
-    this.loadComments();
-    console.log('test');
-  }
-
-  shareComment(): void {
-    if (this.newComment.trim()) {
-      console.log('newComment antes de enviar:', this.newComment);
-      this.userService.addComment(this.newComment).subscribe(
-        comment => {
-          console.log('Respuesta del servidor:', comment);
-  
-          const newCommentData = comment.data ? comment.data : comment; // Verificar si comment contiene data
-  
-          const newComment = {
-            id: newCommentData.id,
-            texto: newCommentData.body,
-            fecha: newCommentData.created_at,
-            usuario: this.user ? this.user.name : ''
-          };
-  
-          this.ideas.push(newComment);
-  
-          // Siempre agregar a this.user.comments si el usuario está definido
-          if (this.user) {
-            this.user.comments = this.user.comments || [];
-            this.user.comments.push({
-              ...newCommentData,
-              user: { name: newComment.usuario }
-            });
-          }
-  
-          if (!this.isAllComments) {
-            // Solo transformar los comentarios del usuario si estamos en modo "ver solo mis comentarios"
-            this.transformComments(this.user?.comments || []);
-          }
-
-          this.newComment = '';
-          this.loadComments();
-        },
-        error => console.error('Error añadiendo comentario:', error)
-      );
-    }
-  }
-    
-  updateComment(idea: any): void {
-    if (idea.texto.trim()) {
-      this.userService.updateComment(idea.id, idea.texto).subscribe(
-        response => {
-          console.log('Comentario actualizado:', response);
-          
-          if (!this.isAllComments && this.user && this.user.comments) {
-            const index = this.user.comments.findIndex(comment => comment.id === idea.id);
-            if (index > -1) {
-              this.user.comments[index] = {
-                ...this.user.comments[index],
-                body: idea.texto
-              };
-              this.transformComments(this.user.comments);
-            }
-          }
-          
-          idea.editing = false;
-        },
-        error => console.error('Error actualizando comentario:', error)
-      );
-    }
-  }
-  
-
-  editComment(idea: any): void {
-    idea.editing = true;
-  }
-
-  deleteComment(id: number): void {
-    this.userService.deleteComment(id).subscribe(
-      () => {
-        console.log('Comentario eliminado:', id);
-        if (!this.isAllComments && this.user && this.user.comments) {
-          this.user.comments = this.user.comments.filter(comment => comment.id !== id);
-          this.transformComments(this.user.comments);
-        }
-        
-        this.loadComments();
-      },
-      error => console.error('Error eliminando comentario:', error)
     );
   }
 
-  previousPage(): void {
-    this.changePage(this.currentPage - 1);
+  loadAllComments() {
+    this.userService.getAllComments().subscribe(
+      response => {
+        console.log('all',response);
+        this.allComments = response.data;
+        this.ideas  = response.data; 
+      }
+    );
   }
 
-  nextPage(): void {
-    this.changePage(this.currentPage + 1);
-  }
-
-  goToPage(page: number): void {
-    this.changePage(page);
-  }
-
-  private changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.loadComments();
+  filterMyComments() {
+    if (this.userData) {
+        this.ideas  = this.allComments.filter(comment => comment.user.id === this.userData?.id);
     }
   }
 
-  logout(): void {
-    this.authService.logout().subscribe(
-      () => {
-        console.log('Usuario deslogueado exitosamente');
-        this.authService.removeToken();
-        this.user = undefined;
-        this.router.navigate(['/']);
-      },
-      error => console.error('Error al desloguear el usuario', error)
-    );
+  showAllComments() {
+    this.ideas  = this.allComments;
   }
 }
