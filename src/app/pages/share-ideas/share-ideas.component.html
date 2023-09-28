@@ -9,7 +9,7 @@
       </a>
       <div class="nav-item dropdown p-2">
         <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {{user?.name}}
+          {{ userData?.name }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
           <li><a class="dropdown-item" routerLink="/" routerLinkActive="active">Inicio</a></li>
@@ -21,7 +21,7 @@
   <div class="container share-ideas-box d-flex flex-column p-0">
     <h2 class="mb-4">Comparte tu idea</h2>
     <textarea class="form-control" rows="5" [(ngModel)]="newComment"></textarea>
-    <button class="btn mt-4 ms-auto" (click)="shareComment()"> Share <i class="bi bi-arrow-right"></i> </button>
+    <button class="btn mt-4 ms-auto" (click)="addComment()"> Share <i class="bi bi-arrow-right"></i> </button>
   </div>
   <div class="container p-0">
     <div class="dropdown my-3">
@@ -29,8 +29,8 @@
         Filtrar Comentarios
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" (click)="updateComments(true)">Ver todos los comentarios</a></li>
-        <li><a class="dropdown-item" (click)="updateComments(false)">Ver solo mis comentarios</a></li>
+        <li><a class="dropdown-item" (click)="showAllComments()">Ver todos los comentarios</a></li>
+        <li><a class="dropdown-item" (click)="filterMyComments()">Ver solo mis comentarios</a></li>
       </ul>
     </div>
   </div>
@@ -41,18 +41,20 @@
           <i class="bi bi-person-fill"></i>
         </div>
         <div class="idea-content d-flex">
-          <p *ngIf="!idea.editing">{{ idea.texto }}</p>
-          <input *ngIf="idea.editing" [(ngModel)]="idea.texto" class="form-control" />
+          <p *ngIf="!idea.isEditing; else inputTemplate">{{ idea.body }}</p>
+          <ng-template #inputTemplate>
+              <input class="form-control" [(ngModel)]="idea.editingValue" />
+          </ng-template>
           <div class="ms-auto my-auto">
-            <button *ngIf="!idea.editing" (click)="editComment(idea)"><i class="bi bi-pencil-fill"></i></button>
-            <button *ngIf="idea.editing" (click)="updateComment(idea)"><i class="bi bi-floppy-fill"></i></button>
+            <button *ngIf="!idea.isEditing" (click)="enableEditing(idea)"><i class="bi bi-pencil-fill"></i></button>
+            <button *ngIf="idea.isEditing"  (click)="saveEdit(idea)"><i class="bi bi-floppy-fill"></i></button>
             <button (click)="deleteComment(idea.id)"><i class="bi bi-trash-fill"></i></button>
           </div>
         </div>
       </div>
       <div class="idea-footer justify-content-end">
-        <p>{{ idea.fecha }}</p>
-        <p>{{ idea.usuario }}</p>
+        <p>{{ formatDate(idea.created_at) }}</p>
+        <p>{{ idea.user.name }}</p>
       </div>
     </div>
   </div>
