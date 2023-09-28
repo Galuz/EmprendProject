@@ -18,7 +18,6 @@ export class LoginComponent {
     this.errorMessage = '';
     this.authService.login(this.usuario, this.contrasena).subscribe(
       (response) => {
-        console.log('Login exitoso:', response);
         if(response.data && response.data.api_token) {
           localStorage.setItem('api_token', response.data.api_token);
           localStorage.setItem('user_name', response.data.name);

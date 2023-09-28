@@ -33,7 +33,6 @@ export class RegisterComponent {
 
     this.authService.register(userData).subscribe(
       (response) => {
-        console.log('register',response)
         localStorage.setItem('api_token', response.data.api_token);
         localStorage.setItem('user_name', response.data.name);
         this.router.navigate(['/share']);
