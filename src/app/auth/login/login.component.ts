@@ -21,6 +21,7 @@ export class LoginComponent {
         console.log('Login exitoso:', response);
         if(response.data && response.data.api_token) {
           localStorage.setItem('api_token', response.data.api_token);
+          localStorage.setItem('user_name', response.data.name);
           this.router.navigate(['/share']);
         }
       },
