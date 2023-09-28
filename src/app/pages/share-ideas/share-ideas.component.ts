@@ -125,12 +125,25 @@ export class ShareIdeasComponent implements OnInit {
       this.userService.updateComment(idea.id, idea.texto).subscribe(
         response => {
           console.log('Comentario actualizado:', response);
+          
+          if (!this.isAllComments && this.user && this.user.comments) {
+            const index = this.user.comments.findIndex(comment => comment.id === idea.id);
+            if (index > -1) {
+              this.user.comments[index] = {
+                ...this.user.comments[index],
+                body: idea.texto
+              };
+              this.transformComments(this.user.comments);
+            }
+          }
+          
           idea.editing = false;
         },
         error => console.error('Error actualizando comentario:', error)
       );
     }
   }
+  
 
   editComment(idea: any): void {
     idea.editing = true;
@@ -140,6 +153,11 @@ export class ShareIdeasComponent implements OnInit {
     this.userService.deleteComment(id).subscribe(
       () => {
         console.log('Comentario eliminado:', id);
+        if (!this.isAllComments && this.user && this.user.comments) {
+          this.user.comments = this.user.comments.filter(comment => comment.id !== id);
+          this.transformComments(this.user.comments);
+        }
+        
         this.loadComments();
       },
       error => console.error('Error eliminando comentario:', error)
