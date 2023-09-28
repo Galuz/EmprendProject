@@ -36,7 +36,6 @@ export class ShareIdeasComponent {
   loadUserData(){
     this.userService.getUser().subscribe(
       response => {
-        console.log(response)
         this.userData = response.data;
       }
     );
@@ -45,7 +44,6 @@ export class ShareIdeasComponent {
   loadAllComments() {
     this.userService.getAllComments(this.currentPage).subscribe(
       response => {
-        console.log('all',response);
         this.allComments = response.data;
         this.ideas  = response.data; 
         this.totalPages = response.meta.last_page;
