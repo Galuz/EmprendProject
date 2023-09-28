@@ -68,4 +68,43 @@ export class ShareIdeasComponent {
       alert('El comentario no puede estar vacío');
     }
   }
+
+  enableEditing(idea: Comment) {
+    idea.isEditing = true;
+    idea.editingValue = idea.body;
+  }
+  saveEdit(idea: Comment) {
+    if (idea.editingValue?.trim()) {
+      this.userService.updateComment(idea.id, idea.editingValue).subscribe(
+        () => {
+          const index = this.ideas.findIndex(i => i.id === idea.id);
+          if (index > -1 && idea.editingValue != null) {
+            this.ideas[index] = { ...idea, isEditing: false, body: idea.editingValue };
+          }
+          alert('Comentario actualizado con éxito');
+        },
+        error => {
+          console.error('Error updating comment', error);
+          alert('Error actualizando el comentario');
+        }
+      );
+    } else {
+      alert('El comentario no puede estar vacío');
+    }
+  }
+  
+  deleteComment(id: number) {
+    if (confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
+      this.userService.deleteComment(id).subscribe(
+        () => {
+          this.loadAllComments(); // Recarga los comentarios después de eliminar uno
+          alert('Comentario eliminado con éxito');
+        },
+        error => {
+          console.error('Error deleting comment', error);
+          alert('Error eliminando el comentario');
+        }
+      );
+    }
+  }
 }

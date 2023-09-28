@@ -12,6 +12,8 @@ export interface Comment {
     user: User;
     created_at: string;
     updated_at: string;
+    isEditing?: boolean;
+    editingValue?: string;
 }
 
 export interface UserDataResponse {
