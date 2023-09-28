@@ -14,7 +14,7 @@ export class ShareIdeasComponent {
   ideas :Comment[] = [];
   allComments: Comment[] = [];
   userData: UserDataResponse | null = null;
-  isEditing = false; // Nueva variable para controlar si se está editando
+  isEditing = false;
   editingValue = '';
   newComment = '';
   currentPage = 1;

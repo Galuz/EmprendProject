@@ -22,8 +22,8 @@ export class LocationCardComponent implements OnInit{
   loadMap() {
     this.ngZone.runOutsideAngular(() => {
       const mapOptions = {
-        center: { lat: -34.397, lng: 150.644 }, // Cambia las coordenadas a las que desees
-        zoom: 8 // Cambia el nivel de zoom según tus necesidades
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8
       };
 
       if (this.mapContainer) {
