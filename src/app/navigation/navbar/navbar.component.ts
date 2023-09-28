@@ -19,6 +19,7 @@ export class NavbarComponent {
     this.authService.logout().subscribe(
       () => {
         console.log('Usuario deslogueado exitosamente');
+        this.userName = '';
         this.authService.removeToken();
       },
       error => {
