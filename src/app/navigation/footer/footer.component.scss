@@ -27,6 +27,10 @@
     }
   }
   .contact{
+    justify-content: start;
+    @media (min-width: 768px) {
+      justify-content: end;
+    }
     i{
       font-size: 32px;
     }
