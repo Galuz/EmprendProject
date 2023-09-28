@@ -1,14 +1,20 @@
 <div class="share-ideas">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/">
         <div class="logo">
           <i class="bi bi-compass-fill"></i>
           emprenD
         </div>
       </a>
-      <div class="user-name d-flex p-2">
-        <p class="my-auto">{{ user?.name }}</p>
+      <div class="nav-item dropdown p-2">
+        <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{user?.name}}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" routerLink="/">Inicio</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
+        </ul>
       </div>
     </div>
   </nav>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/share-ideas/user.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 interface Comment {
   id: number;
@@ -37,7 +39,7 @@ export class ShareIdeasComponent implements OnInit {
   showPagination: boolean = false;
   userComments: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadUser(); 
@@ -129,8 +131,6 @@ export class ShareIdeasComponent implements OnInit {
     this.userService.deleteComment(id).subscribe(
       response => {
         console.log('Comentario eliminado:', response);
-        // Aquí podrías también quitar el comentario de tu lista local de comentarios, 
-        // o volver a cargar los comentarios si lo prefieres.
         this.loadComments();
       },
       error => console.error('Error eliminando comentario:', error)
@@ -156,5 +156,11 @@ export class ShareIdeasComponent implements OnInit {
       this.currentPage = page;
       this.loadComments();
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.user = null;
+    this.router.navigate(['/']);
   }
 }
