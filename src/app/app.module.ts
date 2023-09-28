@@ -14,6 +14,7 @@ import { CardComponent } from './pages/card/card.component';
 import { ContactFormComponent } from './pages/contact-form/contact-form.component';
 import { LocationCardComponent } from './pages/location-card/location-card.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { RegisterComponent } from './auth/register/register.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

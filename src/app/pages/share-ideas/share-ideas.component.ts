@@ -3,6 +3,7 @@ import { UserService } from 'src/app/share-ideas/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Comment, UserDataResponse } from 'src/app/interfaces/share-data';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-share-ideas',
@@ -20,7 +21,12 @@ export class ShareIdeasComponent {
   totalPages = 10;
   showPagination = false;
   
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private userService: UserService, 
+    private authService: AuthService, 
+    private router: Router,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit() {
     this.loadUserData();
@@ -130,5 +136,10 @@ export class ShareIdeasComponent {
       this.currentPage = page;
       this.loadAllComments();
     }
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
   }
 }
