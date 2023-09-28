@@ -19,7 +19,7 @@ interface Comment {
 })
 export class ShareIdeasComponent implements OnInit {
   
-  ideas: Array<{ id: number; texto: string; fecha: string; usuario: string; editing?: boolean }> = [];
+  ideas: Array<{ id: number; texto: string; fecha: string; usuario?: string; editing?: boolean }> = [];
   user?: { name: string; comments?: Comment[] };
   newComment = '';
   isAllComments = true;
@@ -88,20 +88,19 @@ export class ShareIdeasComponent implements OnInit {
     if (this.newComment.trim()) {
       this.userService.addComment(this.newComment).subscribe(
         comment => {
-          console.log('Comentario añadido:', comment);
-          this.ideas.push({
-            id: comment.id,
-            texto: comment.body,
-            fecha: comment.created_at,
-            usuario: comment.user.name,
-            editing: false
-          });
-          this.newComment = '';
+          console.log('comment', comment);
+            this.ideas.push({
+              id: comment.id,
+              texto: comment.body,
+              fecha: comment.created_at,
+            });
+            this.newComment = '';
+            this.loadComments();
         },
         error => console.error('Error añadiendo comentario:', error)
       );
     }
-  }
+  }  
 
   updateComment(idea: any): void {
     if (idea.texto.trim()) {
