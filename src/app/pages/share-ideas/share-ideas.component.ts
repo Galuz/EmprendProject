@@ -17,44 +17,30 @@ interface Comment {
   templateUrl: './share-ideas.component.html',
   styleUrls: ['./share-ideas.component.scss']
 })
-
-
 export class ShareIdeasComponent implements OnInit {
   
-  ideas = [
-    {
-      id: 1,
-      texto: '',
-      fecha: '',
-      usuario: '',
-      editing: false
-    },
-  ];
-  user: any; 
-  newComment: string = '';
-  isAllComments: boolean = true;
-  currentPage: number = 1;
+  ideas: Array<{ id: number; texto: string; fecha: string; usuario: string; editing?: boolean }> = [];
+  user?: { name: string; comments?: Comment[] };
+  newComment = '';
+  isAllComments = true;
+  currentPage = 1;
   totalPages = 10;
-  paginationLinks: any;
-  showPagination: boolean = false;
-  userComments: any;
+  showPagination = false;
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadUser(); 
+    this.loadUser();
     this.loadComments();
   }
 
   loadUser(): void {
     this.userService.getUser().subscribe(
       response => {
-        console.log('User data',response)
         this.user = response.data;
-        // Almacena los comentarios del usuario en la variable userComments
-        if (response.data && Array.isArray(response.data.comments)) {
-          this.userComments = response.data.comments.map((comment: Comment) => ({
-            id: comment.id,
+        if (this.user && this.user?.comments) {
+          this.user.comments = this.user.comments.map(comment => ({
+            ...comment,
             texto: comment.body,
             fecha: comment.created_at,
             usuario: comment.user.name
@@ -65,30 +51,30 @@ export class ShareIdeasComponent implements OnInit {
     );
   }
 
-  loadPage(page: number): void {
-    this.currentPage = page;
-    this.loadComments();
-  }
-
   loadComments(): void {
     if (this.isAllComments) {
       this.userService.getAllComments(this.currentPage).subscribe(
         response => {
-          console.log(response)
           this.ideas = response.data.map((comment: Comment) => ({
             id: comment.id,
             texto: comment.body,
             fecha: comment.created_at,
-            usuario: comment.user.name
+            usuario: comment.user.name,
+            editing: false
           }));
           this.totalPages = response.meta.last_page;
-          this.paginationLinks = response.links;
-          this.showPagination = true;
+          this.showPagination = this.totalPages > 1;
         },
         error => console.error('Error obteniendo todos los comentarios:', error)
       );
     } else {
-      this.ideas = [...this.userComments];
+      this.ideas = this.user?.comments?.map((comment: Comment) => ({
+        id: comment.id,
+        texto: comment.body,
+        fecha: comment.created_at,
+        usuario: comment.user.name,
+        editing: false
+      })) || [];
       this.showPagination = false;
     }
   }
@@ -99,11 +85,17 @@ export class ShareIdeasComponent implements OnInit {
   }
 
   shareComment(): void {
-    if (this.newComment) {
+    if (this.newComment.trim()) {
       this.userService.addComment(this.newComment).subscribe(
-        data => {
-          console.log('Comentario añadido:', data);
-          this.ideas.push(data);
+        comment => {
+          console.log('Comentario añadido:', comment);
+          this.ideas.push({
+            id: comment.id,
+            texto: comment.body,
+            fecha: comment.created_at,
+            usuario: comment.user.name,
+            editing: false
+          });
           this.newComment = '';
         },
         error => console.error('Error añadiendo comentario:', error)
@@ -111,64 +103,60 @@ export class ShareIdeasComponent implements OnInit {
     }
   }
 
-  updateComment(id: number, body: string): void {
-    this.userService.updateComment(id, body).subscribe(
-      response => console.log('Comentario actualizado:', response),
-      error => console.error('Error actualizando comentario:', error)
-    );
+  updateComment(idea: any): void {
+    if (idea.texto.trim()) {
+      this.userService.updateComment(idea.id, idea.texto).subscribe(
+        response => {
+          console.log('Comentario actualizado:', response);
+          idea.editing = false;
+        },
+        error => console.error('Error actualizando comentario:', error)
+      );
+    }
   }
 
   editComment(idea: any): void {
     idea.editing = true;
   }
 
-  saveComment(idea: any): void {
-    idea.editing = false;
-    this.updateComment(idea.id, idea.texto);
-  }
-
   deleteComment(id: number): void {
     this.userService.deleteComment(id).subscribe(
-      response => {
-        console.log('Comentario eliminado:', response);
+      () => {
+        console.log('Comentario eliminado:', id);
         this.loadComments();
       },
       error => console.error('Error eliminando comentario:', error)
     );
   }
 
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadComments();
-    }
+  previousPage(): void {
+    this.changePage(this.currentPage - 1);
   }
-  
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.loadComments();
-    }
+
+  nextPage(): void {
+    this.changePage(this.currentPage + 1);
   }
-  
-  goToPage(page: number) {
+
+  goToPage(page: number): void {
+    this.changePage(page);
+  }
+
+  private changePage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       this.loadComments();
     }
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout().subscribe(
-      response => {
-        console.log('Usuario deslogueado exitosamente', response);
+      () => {
+        console.log('Usuario deslogueado exitosamente');
         this.authService.removeToken();
-        this.user = null;
+        this.user = undefined;
         this.router.navigate(['/']);
       },
-      error => {
-        console.error('Error al desloguear el usuario', error);
-      }
+      error => console.error('Error al desloguear el usuario', error)
     );
   }
 }

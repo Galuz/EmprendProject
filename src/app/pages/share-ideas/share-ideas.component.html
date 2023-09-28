@@ -45,7 +45,7 @@
           <input *ngIf="idea.editing" [(ngModel)]="idea.texto" class="form-control" />
           <div class="ms-auto my-auto">
             <button *ngIf="!idea.editing" (click)="editComment(idea)"><i class="bi bi-pencil-fill"></i></button>
-            <button *ngIf="idea.editing" (click)="saveComment(idea)"><i class="bi bi-floppy-fill"></i></button>
+            <button *ngIf="idea.editing" (click)="updateComment(idea)"><i class="bi bi-floppy-fill"></i></button>
             <button (click)="deleteComment(idea.id)"><i class="bi bi-trash-fill"></i></button>
           </div>
         </div>
@@ -65,7 +65,7 @@
         <li class="page-item" 
             *ngFor="let page of [].constructor(totalPages); let i = index"
             [ngClass]="{'active': i + 1 === currentPage}">
-          <a class="page-link" href="#" (click)="loadPage(i + 1); $event.preventDefault()">{{ i + 1 }}</a>
+          <a class="page-link" href="#" (click)="goToPage(i + 1); $event.preventDefault()">{{ i + 1 }}</a>
         </li>
         <li class="page-item" [ngClass]="{'disabled': currentPage === totalPages}">
           <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">Next</a>
