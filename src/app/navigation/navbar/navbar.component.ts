@@ -16,8 +16,16 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.authService.logout();
-    this.userName = null;
+    this.authService.logout().subscribe(
+      response => {
+        console.log('Usuario deslogueado exitosamente', response);
+        // Eliminar el token del almacenamiento local y redirigir al usuario
+        this.authService.removeToken();
+      },
+      error => {
+        console.error('Error al desloguear el usuario', error);
+      }
+    );
   }
 
 }

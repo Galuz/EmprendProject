@@ -159,8 +159,16 @@ export class ShareIdeasComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.user = null;
-    this.router.navigate(['/']);
+    this.authService.logout().subscribe(
+      response => {
+        console.log('Usuario deslogueado exitosamente', response);
+        this.authService.removeToken();
+        this.user = null;
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.error('Error al desloguear el usuario', error);
+      }
+    );
   }
 }
