@@ -21,9 +21,20 @@
       }
     }
     .login{
-      background-color: #fe6261 !important;
+      background-color: #fe6261;
       a{
-        color: #efefef !important;
+        color: #efefef;
+      }
+    }
+    .dropdown-menu{
+      li{
+        a{
+          color: #333333;
+          &:hover{
+            cursor: pointer;
+            background-color: #efefef;
+          }
+        }
       }
     }
   }

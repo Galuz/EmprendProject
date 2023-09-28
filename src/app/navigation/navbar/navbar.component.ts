@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +8,16 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   userName: string | null = null;
+
+  constructor(private authService: AuthService) { }
   
   ngOnInit() {
-    this.userName = localStorage.getItem('user_name'); // Obtener el nombre
+    this.userName = localStorage.getItem('user_name');
   }
+
+  logout() {
+    this.authService.logout();
+    this.userName = null;
+  }
+
 }

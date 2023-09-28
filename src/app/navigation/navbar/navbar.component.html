@@ -34,8 +34,14 @@
           <li class="nav-item">
             <a class="nav-link" href="#contact-section">Contacto</a>
           </li>
-          <li class="nav-item login" *ngIf="userName; else loginTemplate">
-            <a class="nav-link" routerLink="/share">{{userName}}</a>
+          <li class="nav-item dropdown login" *ngIf="userName; else loginTemplate">
+            <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{userName}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" routerLink="/share">Ideas Dashboard</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
+            </ul>
           </li>
           <ng-template #loginTemplate>
             <li class="nav-item login">
