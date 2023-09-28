@@ -16,6 +16,9 @@ export class ShareIdeasComponent {
   isEditing = false; // Nueva variable para controlar si se está editando
   editingValue = '';
   newComment = '';
+  currentPage = 1;
+  totalPages = 10;
+  showPagination = false;
   
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
@@ -34,11 +37,13 @@ export class ShareIdeasComponent {
   }
 
   loadAllComments() {
-    this.userService.getAllComments().subscribe(
+    this.userService.getAllComments(this.currentPage).subscribe(
       response => {
         console.log('all',response);
         this.allComments = response.data;
         this.ideas  = response.data; 
+        this.totalPages = response.meta.last_page;
+        this.showPagination = this.totalPages > 1;
       }
     );
   }
@@ -92,7 +97,7 @@ export class ShareIdeasComponent {
       alert('El comentario no puede estar vacío');
     }
   }
-  
+
   deleteComment(id: number) {
     if (confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
       this.userService.deleteComment(id).subscribe(
@@ -105,6 +110,25 @@ export class ShareIdeasComponent {
           alert('Error eliminando el comentario');
         }
       );
+    }
+  }
+
+  previousPage(): void {
+    this.changePage(this.currentPage - 1);
+  }
+
+  nextPage(): void {
+    this.changePage(this.currentPage + 1);
+  }
+
+  goToPage(page: number): void {
+    this.changePage(page);
+  }
+
+  private changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadAllComments();
     }
   }
 }
