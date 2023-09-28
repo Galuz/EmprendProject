@@ -15,6 +15,7 @@ export class ShareIdeasComponent {
   userData: UserDataResponse | null = null;
   isEditing = false; // Nueva variable para controlar si se está editando
   editingValue = '';
+  newComment = '';
   
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
@@ -50,5 +51,21 @@ export class ShareIdeasComponent {
 
   showAllComments() {
     this.ideas  = this.allComments;
+  }
+
+  addComment() {
+    if (this.newComment.trim()) {
+      this.userService.addComment(this.newComment).subscribe(
+        () => {
+          this.newComment = '';
+          this.loadAllComments();
+        },
+        error => {
+          console.error('Error adding comment', error);
+        }
+      );
+    } else {
+      alert('El comentario no puede estar vacío');
+    }
   }
 }
