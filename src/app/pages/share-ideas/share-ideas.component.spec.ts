@@ -40,6 +40,7 @@ describe('ShareIdeasComponent', () => {
   });
 
   it('should load user data on init', () => {
+    userServiceMock.getUser.calls.reset();
     const userData = { 
       data: {
         id: 1, 
@@ -59,6 +60,7 @@ describe('ShareIdeasComponent', () => {
   });
 
   it('should load all comments on init', () => {
+    userServiceMock.getAllComments.calls.reset();
     const commentsData = { 
       data: [{
         id: 1, 
