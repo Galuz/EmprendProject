@@ -1,67 +1,75 @@
-.share-ideas{
-  background-color: #efefef;
+$color-primary: #fe6261;
+$color-secondary: #333333;
+$color-light: #efefef;
+$font-primary: 'Poppins', sans-serif;
+
+.share-ideas {
+  background-color: $color-light;
   padding-bottom: 48px;
   min-height: 100vh;
+  
   .navbar {
     margin-bottom: 20px;
-    .navbar-brand{
-      .logo{
-        font-family: 'Poppins', sans-serif;
+    
+    .navbar-brand {
+      .logo {
+        font-family: $font-primary;
         font-weight: 900;
         font-size: 26px;
-        color: #333333;
-        i{
-          color: #fe6261;
+        color: $color-secondary;
+        
+        i {
+          color: $color-primary;
         }
       }
     }
-    .user-name{
-      background-color: #fe6261;
-      min-width: 200px;
-      p{
-        color: #efefef;
+    
+    .dropdown {
+      background-color: $color-primary;
+      
+      a {
+        color: $color-light;
       }
-    }
-    .dropdown{
-      background-color: #fe6261;
-      a{
-        color: #efefef;
-      }
-      .dropdown-menu{
-        li{
-          a{
-            color: #333333;
-            &:hover{
+      
+      .dropdown-menu {
+        li {
+          a {
+            color: $color-secondary;
+            
+            &:hover {
               cursor: pointer;
-              background-color: #efefef;
+              background-color: $color-light;
             }
           }
         }
       }
     }
   }
-  .share-ideas-box{
+  
+  .share-ideas-box {
     margin-top: 80px;
-    h2{
-      font-family: 'Poppins', sans-serif;
+    
+    h2 {
+      font-family: $font-primary;
       font-weight: 900;
       font-size: 26px;
-      color: #333333;
+      color: $color-secondary;
       border: unset;
-      border-bottom: 1px solid #fe6261;
+      border-bottom: 1px solid $color-primary;
     }
-    button{
-      background-color: #fe6261;
-      font-family: 'Poppins', sans-serif;
+    
+    button {
+      background-color: $color-primary;
+      font-family: $font-primary;
       font-weight: 300;
       font-size: 24px;
-      color: #efefef;
+      color: $color-light;
       border-radius: 0;
       border: unset;
     }
   }
   .ideas-wapprer{
-    background-color: #333333;
+    background-color: $color-secondary;
     padding: 80px;
     .idea-item {
       margin-bottom: 32px;
@@ -74,33 +82,33 @@
         flex-shrink: 0;
         border-radius: 50%;
         margin: auto 24px auto 0;
-        background-color: #efefef;
+        background-color: $color-light;
         display: flex;
         i{
           margin: auto;
           font-size: 48px;
-          color: #fe6261;
+          color: $color-primary;
         }
       }
       .idea-content {
         width: 100%;
         padding: 32px;
-        background-color: #efefef;
+        background-color: $color-light;
         >div{
           flex-shrink: 0;
           button{
             border: unset;
             i{
               font-size: 18px;
-              color: #fe6261;
+              color: $color-primary;
             }
           }
         }
         p{
-          font-family: 'Poppins', sans-serif;
+          font-family: $font-primary;
           font-weight: 300;
           font-size: 16px;
-          color: #333333;
+          color: $color-secondary;
           margin-bottom: 0;
         }
       }
@@ -109,10 +117,10 @@
         margin-top: 8px;
         p{
           margin-bottom: 0;
-          font-family: 'Poppins', sans-serif;
+          font-family: $font-primary;
           font-weight: 300;
           font-size: 16px;
-          color: #efefef;
+          color: $color-light;
         }
         p{
           &:first-child{
@@ -122,18 +130,20 @@
       }
     }
   }
-  .pagination-wrapper{
-    .page-link{
-      color: #fe6261;
-      &:focus{
+  .pagination-wrapper {
+    .page-link {
+      color: $color-primary;
+      
+      &:focus {
         box-shadow: none;
       }
     }
-    .active{
-      >.page-link{
-        background-color: #333333;
-        border-color: #333333;
-        color: #efefef;
+    
+    .active {
+      >.page-link {
+        background-color: $color-secondary;
+        border-color: $color-secondary;
+        color: $color-light;
       }
     }
   }
