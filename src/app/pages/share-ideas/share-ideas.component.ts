@@ -91,26 +91,32 @@ export class ShareIdeasComponent implements OnInit {
       this.userService.addComment(this.newComment).subscribe(
         comment => {
           console.log('Respuesta del servidor:', comment);
-          
+  
           const newCommentData = comment.data ? comment.data : comment; // Verificar si comment contiene data
-          
+  
           const newComment = {
             id: newCommentData.id,
             texto: newCommentData.body,
-            fecha: newCommentData.created_at
+            fecha: newCommentData.created_at,
+            usuario: this.user ? this.user.name : ''
           };
-          
+  
           this.ideas.push(newComment);
-          
-          if (!this.isAllComments && this.user && this.user.comments) {
+  
+          // Siempre agregar a this.user.comments si el usuario está definido
+          if (this.user) {
+            this.user.comments = this.user.comments || [];
             this.user.comments.push({
               ...newCommentData,
-              user: { name: this.user.name } 
+              user: { name: newComment.usuario }
             });
-            console.log('comments',this.user.comments);
-            this.transformComments(this.user.comments);
           }
   
+          if (!this.isAllComments) {
+            // Solo transformar los comentarios del usuario si estamos en modo "ver solo mis comentarios"
+            this.transformComments(this.user?.comments || []);
+          }
+
           this.newComment = '';
           this.loadComments();
         },
@@ -118,8 +124,7 @@ export class ShareIdeasComponent implements OnInit {
       );
     }
   }
-  
-
+    
   updateComment(idea: any): void {
     if (idea.texto.trim()) {
       this.userService.updateComment(idea.id, idea.texto).subscribe(
