@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
 
 describe('ShareIdeasComponent', () => {
   let component: ShareIdeasComponent;
@@ -14,22 +15,25 @@ describe('ShareIdeasComponent', () => {
   let authServiceMock: jasmine.SpyObj<AuthService>;
   let routerMock: jasmine.SpyObj<Router>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     userServiceMock = jasmine.createSpyObj('UserService', ['getUser', 'getAllComments', 'addComment', 'updateComment', 'deleteComment']);
     authServiceMock = jasmine.createSpyObj('AuthService', ['logout', 'removeToken']);
     routerMock = jasmine.createSpyObj('Router', ['navigate']);
-
-    TestBed.configureTestingModule({
+    
+    await TestBed.configureTestingModule({
       declarations: [ ShareIdeasComponent ],
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientTestingModule, FormsModule ],
       providers: [
         { provide: UserService, useValue: userServiceMock },
         { provide: AuthService, useValue: authServiceMock },
         { provide: Router, useValue: routerMock },
         DatePipe
       ]
-    });
-
+    }).compileComponents();
+    
+    userServiceMock.getUser.and.returnValue(of({ data: {} }));
+    userServiceMock.getAllComments.and.returnValue(of({ data: [], meta: { last_page: 1 } }));
+    
     fixture = TestBed.createComponent(ShareIdeasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -41,6 +45,7 @@ describe('ShareIdeasComponent', () => {
 
   it('should load user data on init', () => {
     userServiceMock.getUser.calls.reset();
+    
     const userData = { 
       data: {
         id: 1, 
@@ -53,14 +58,15 @@ describe('ShareIdeasComponent', () => {
     };
     
     userServiceMock.getUser.and.returnValue(of(userData));
-  
+    
     component.ngOnInit();
-  
+    
     expect(component.userData).toEqual(userData.data);
   });
 
   it('should load all comments on init', () => {
     userServiceMock.getAllComments.calls.reset();
+    
     const commentsData = { 
       data: [{
         id: 1, 
@@ -71,19 +77,18 @@ describe('ShareIdeasComponent', () => {
           email: 'test@example.com'
         },
         created_at: '2023-09-28T12:00:00Z',
-        updated_at: '2023-09-28T12:00:00Z',
-        // incluir isEditing y editingValue?
-      }], 
-      meta: { last_page: 2 } 
+        updated_at: '2023-09-28T12:00:00Z'
+      }],
+      meta: { last_page: 2 }
     };
+    
     userServiceMock.getAllComments.and.returnValue(of(commentsData));
-  
+    
     component.ngOnInit();
-  
+    
     expect(component.allComments).toEqual(commentsData.data);
     expect(component.ideas).toEqual(commentsData.data);
     expect(component.totalPages).toEqual(commentsData.meta.last_page);
     expect(component.showPagination).toBeTrue();
   });
-
 });
