@@ -1,5 +1,3 @@
-export interface ShareData {}
-
 export interface User {
     id: number;
     name: string;
