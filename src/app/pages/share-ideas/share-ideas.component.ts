@@ -51,56 +51,74 @@ export class ShareIdeasComponent implements OnInit {
     );
   }
 
+  private transformComments(comments: Comment[]): void {
+    this.ideas = comments.map(comment => ({
+      id: comment.id,
+      texto: comment.body,
+      fecha: comment.created_at,
+      usuario: comment.user.name,
+      editing: false
+    }));
+  }
+
   loadComments(): void {
     if (this.isAllComments) {
       this.userService.getAllComments(this.currentPage).subscribe(
         response => {
-          this.ideas = response.data.map((comment: Comment) => ({
-            id: comment.id,
-            texto: comment.body,
-            fecha: comment.created_at,
-            usuario: comment.user.name,
-            editing: false
-          }));
+          this.transformComments(response.data);
           this.totalPages = response.meta.last_page;
           this.showPagination = this.totalPages > 1;
         },
         error => console.error('Error obteniendo todos los comentarios:', error)
       );
     } else {
-      this.ideas = this.user?.comments?.map((comment: Comment) => ({
-        id: comment.id,
-        texto: comment.body,
-        fecha: comment.created_at,
-        usuario: comment.user.name,
-        editing: false
-      })) || [];
-      this.showPagination = false;
+      if (this.user && this.user.comments) {
+        this.transformComments(this.user.comments);
+        this.showPagination = false;
+      }
     }
   }
 
   updateComments(value: boolean): void {
     this.isAllComments = value;
     this.loadComments();
+    console.log('test');
   }
 
   shareComment(): void {
     if (this.newComment.trim()) {
+      console.log('newComment antes de enviar:', this.newComment);
       this.userService.addComment(this.newComment).subscribe(
         comment => {
-          console.log('comment', comment);
-            this.ideas.push({
-              id: comment.id,
-              texto: comment.body,
-              fecha: comment.created_at,
+          console.log('Respuesta del servidor:', comment);
+          
+          const newCommentData = comment.data ? comment.data : comment; // Verificar si comment contiene data
+          
+          const newComment = {
+            id: newCommentData.id,
+            texto: newCommentData.body,
+            fecha: newCommentData.created_at
+          };
+          
+          this.ideas.push(newComment);
+          
+          if (!this.isAllComments && this.user && this.user.comments) {
+            this.user.comments.push({
+              ...newCommentData,
+              user: { name: this.user.name } 
             });
-            this.newComment = '';
-            this.loadComments();
+            console.log('comments',this.user.comments);
+            this.transformComments(this.user.comments);
+          }
+  
+          this.newComment = '';
+          this.loadComments();
         },
         error => console.error('Error añadiendo comentario:', error)
       );
     }
-  }  
+  }
+  
 
   updateComment(idea: any): void {
     if (idea.texto.trim()) {
