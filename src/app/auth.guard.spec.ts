@@ -1,17 +1,30 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from '../app/services/auth.service'; // Asegúrate de que esta ruta es correcta
+import { Router } from '@angular/router';
 
-import { authGuard } from './auth.guard';
+describe('AuthGuard', () => {
 
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authGuard(...guardParameters));
+  let guard: AuthGuard;
+  let authServiceMock: jasmine.SpyObj<AuthService>;
+  let routerMock: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    authServiceMock = jasmine.createSpyObj('AuthService', ['isLoggedIn']);
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
+
+    TestBed.configureTestingModule({
+      providers: [
+        AuthGuard,
+        { provide: AuthService, useValue: authServiceMock },
+        { provide: Router, useValue: routerMock }
+      ]
+    });
+
+    guard = TestBed.inject(AuthGuard);
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+    expect(guard).toBeTruthy();
   });
 });
